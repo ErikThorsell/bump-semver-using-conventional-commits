@@ -1,0 +1,10 @@
+{
+    "message": "fix: prevent racing of requests\n\nIntroduce a request id and a reference to latest request. Dismiss\nincoming responses other than from latest request.\n\nRemove timeouts which were used to mitigate the racing issue but are\nobsolete now.\n\nReviewed-by: Z\nRefs: #123",
+    "type": "fix",
+    "breaking_flag": false,
+    "breaking_token": "",
+    "scope": "",
+    "bump": "PATCH",
+    "old_version": "1.0.0",
+    "new_version": "1.0.1"
+}

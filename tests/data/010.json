@@ -1,0 +1,10 @@
+{
+    "message": "docs: correct spelling of CHANGELOG",
+    "type": "docs",
+    "breaking_flag": false,
+    "breaking_token": "",
+    "scope": "",
+    "bump": "PATCH",
+    "old_version": "1.0.0",
+    "new_version": "1.0.1"
+}

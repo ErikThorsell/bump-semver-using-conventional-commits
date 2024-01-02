@@ -1,0 +1,10 @@
+{
+    "message": "feat: add cool feature",
+    "type": "feat",
+    "breaking_flag": false,
+    "breaking_token": "",
+    "scope": "",
+    "bump": "MINOR",
+    "old_version": "1.0.0",
+    "new_version": "1.1.0"
+}

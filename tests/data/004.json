@@ -1,0 +1,10 @@
+{
+    "message": "ci: make everything run twice as fast",
+    "type": "ci",
+    "breaking_flag": false,
+    "breaking_token": "",
+    "scope": "",
+    "bump": "PATCH",
+    "old_version": "1.0.0",
+    "new_version": "1.0.1"
+}

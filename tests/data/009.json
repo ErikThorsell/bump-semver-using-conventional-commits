@@ -1,0 +1,10 @@
+{
+    "message": "chore!: drop support for Node 6\n\nBREAKING CHANGE: use JavaScript features not available in Node 6.",
+    "type": "chore",
+    "breaking_flag": true,
+    "breaking_token": "BREAKING CHANGE",
+    "scope": "",
+    "bump": "MAJOR",
+    "old_version": "1.0.0",
+    "new_version": "2.0.0"
+}

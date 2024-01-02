@@ -1,0 +1,10 @@
+{
+    "message": "feat: allow provided config object to extend other configs\n\nBREAKING CHANGE: `extends` key in config file is now used for extending other config files",
+    "type": "feat",
+    "breaking_flag": false,
+    "breaking_token": "BREAKING CHANGE",
+    "scope": "",
+    "bump": "MAJOR",
+    "old_version": "1.0.0",
+    "new_version": "2.0.0"
+}

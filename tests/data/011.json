@@ -1,0 +1,10 @@
+{
+    "message": "feat(lang): add Polish language",
+    "type": "feat",
+    "breaking_flag": false,
+    "breaking_token": "",
+    "scope": "lang",
+    "bump": "MINOR",
+    "old_version": "1.0.0",
+    "new_version": "1.1.0"
+}

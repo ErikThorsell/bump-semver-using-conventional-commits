@@ -43,6 +43,9 @@ scopes = [
 "lang"
 ]
 
+[tool.poetry.scripts]
+conventional_semver = "conventional_semver.main:main"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

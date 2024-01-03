@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "conventional_semver"
-version = "0.1.0-pre1"
+version = "0.1.0-pre2"
 description = "CLI tool for deciding the next semantic version of the project, using conventional commits."
 authors = ["Erik Thorsell <erik@thorsell.io>"]
 license = "GPLv3"
@@ -44,7 +44,7 @@ scopes = [
 ]
 
 [tool.poetry.scripts]
-conventional_semver = "conventional_semver.main:main"
+conventional_semver = "conventional_semver.conventional_semver:main"
 
 [build-system]
 requires = ["poetry-core"]

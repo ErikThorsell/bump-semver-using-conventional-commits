@@ -73,8 +73,11 @@ jobs:
           path: ./.venv
           key: venv-${{ hashFiles('poetry.lock') }}
 
-      - name: Install dependencies
-        run: poetry install
-
       - name: Build package
         run: poetry build
+
+      - name: Publish package
+        run: poetry publish --repository publish
+        env:
+          POETRY_REPOSITORIES_PUBLISH_URL: https://test.pypi.org/legacy/
+          POETRY_PYPI_TOKEN_PUBLISH: ${{ secrets.PYPI_TEST_API_TOKEN }}

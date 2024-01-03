@@ -13,7 +13,7 @@ def test__parse__correct_type_and_breaking():
         with open(test_file) as in_f:
             test_data = json.load(in_f)
 
-            parsed_message = parse(test_data["message"])
+            parsed_message = parse(test_data["message"], "config.toml")
             assert parsed_message.header["type"] == test_data["type"]
             assert parsed_message.breaking["flag"] == test_data["breaking_flag"]
             assert parsed_message.breaking["token"] == test_data["breaking_token"]
@@ -28,7 +28,7 @@ def test__calculate__correct_bump():
         with open(test_file) as in_f:
             test_data = json.load(in_f)
 
-            parsed_message = parse(test_data["message"])
+            parsed_message = parse(test_data["message"], "config.toml")
             bump = calculate_bump(parsed_message)
 
             assert bump == test_data["bump"]
@@ -42,7 +42,7 @@ def test__calculate__new_version():
         with open(test_file) as in_f:
             test_data = json.load(in_f)
 
-            parsed_message = parse(test_data["message"])
+            parsed_message = parse(test_data["message"], "config.toml")
             bump = calculate_bump(parsed_message)
 
             new_version = calculate_new_version(test_data["old_version"], bump)

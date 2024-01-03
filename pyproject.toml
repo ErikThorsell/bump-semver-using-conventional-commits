@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "conventional_semver"
-version = "0.1.0-pre2"
+version = "0.1.0-pre3"
 description = "CLI tool for deciding the next semantic version of the project, using conventional commits."
 authors = ["Erik Thorsell <erik@thorsell.io>"]
 license = "GPLv3"
@@ -16,32 +16,6 @@ semantic-version = "^2.10.0"
 black = "^23.12.1"
 flake8 = "^6.1.0"
 pytest = "^7.4.4"
-
-[tool.pccc]
-header_length = 80
-body_length = 120
-rewrap = false
-spell_check = false
-repair = false
-
-types = [
-"build",
-"chore",
-"ci",
-"docs",
-"feat",
-"fix",
-"perf",
-"refactor",
-"revert",
-"style",
-"test"
-]
-
-scopes = [
-"api",
-"lang"
-]
 
 [tool.poetry.scripts]
 conventional_semver = "conventional_semver.conventional_semver:main"

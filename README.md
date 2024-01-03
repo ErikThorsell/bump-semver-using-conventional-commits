@@ -17,6 +17,10 @@ the version be_?) and to inform your CI/build-system how to tag a new commit on 
 $> pip install conventional_semver
 ```
 
+### Configuration
+
+Create a `.toml` file and modify the settings you want to be different from the PCCC defaults. An example `config.toml` file is present in this repository.
+
 ### Example with version provided
 
 For maximum flexibility, the tool can be run with both the message and current version as inputs:

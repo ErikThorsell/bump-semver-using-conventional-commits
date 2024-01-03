@@ -1,0 +1,25 @@
+[pccc]
+header_length = 80
+body_length = 120
+rewrap = false
+spell_check = false
+repair = false
+
+types = [
+"build",
+"chore",
+"ci",
+"docs",
+"feat",
+"fix",
+"perf",
+"refactor",
+"revert",
+"style",
+"test"
+]
+
+scopes = [
+"api",
+"lang"
+]

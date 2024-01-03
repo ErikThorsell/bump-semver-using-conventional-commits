@@ -4,8 +4,8 @@ import sys
 
 from loguru import logger
 
-from calculate import calculate_bump, calculate_new_version
-from validate import parse
+from conventional_semver.calculate import calculate_bump, calculate_new_version
+from conventional_semver.validate import parse
 
 
 def _parse_args():
@@ -38,6 +38,11 @@ def _parse_args():
         "--debug",
         action="store_true",
         help="Set log level to DEBUG",
+    )
+
+    parser.add_argument(
+        "--config",
+        help="Provide path to PCCC config file",
     )
 
     parser.add_argument(
@@ -92,10 +97,10 @@ def main():
     else:
         logger.add(sys.stderr, level="INFO")
 
-    logger.debug(f"Message:\n{args.message}")
+    logger.info(f"Message:\n{args.message}")
 
     # Parse the commit message and compute the bump
-    parsed_message = parse(args.message)
+    parsed_message = parse(args.message, args.config)
     bump = calculate_bump(parsed_message)
 
     # Determine how to get ahold of the latest version

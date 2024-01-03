@@ -3,7 +3,7 @@ import pccc
 from pccc.config import _load_file
 
 
-def _get_config():
+def _get_config(config_file):
     """Set the configuration for the PCCC CCR.
 
     In order to circumvent the _create_argument_parser() call used by Config()
@@ -15,14 +15,11 @@ def _get_config():
     ``pccc.besp``.
     """
     config = pccc.Config()
-    config.update(**_load_file())
-
-    #    logger.debug(f"Using configuration:\n{config}")
-
+    config.update(**_load_file(config_file))
     return config
 
 
-def parse(message):
+def parse(message, config_file):
     """Use The Python Conventional Commit Parser to parse the commit message.
 
     If the ccr.parse() call is NOT successful an Exception will be raised.
@@ -31,7 +28,7 @@ def parse(message):
     logger.debug(f"{message}")
 
     ccr = pccc.ConventionalCommitRunner()
-    ccr.options = _get_config()
+    ccr.options = _get_config(config_file)
 
     ccr.raw = message.strip()
     ccr.clean()

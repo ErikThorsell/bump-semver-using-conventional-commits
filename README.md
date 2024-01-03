@@ -14,7 +14,7 @@ the version be_?) and to inform your CI/build-system how to tag a new commit on 
 ## Installation and Usage
 
 ```shell
-$> pip install conventional-commits-cli
+$> pip install conventional_semver
 ```
 
 ### Example with version provided
@@ -22,7 +22,7 @@ $> pip install conventional-commits-cli
 For maximum flexibility, the tool can be run with both the message and current version as inputs:
 
 ```shell
-$> conventional-commits-cli -m "feat: add list_all to /api/v2" -v "1.3.5"
+$> conventional_semver -m "feat: add list_all to /api/v2" -v "1.3.5"
 1.4.0
 ```
 
@@ -32,7 +32,7 @@ It is also possible to fetch the latest tag from the current branch, using the `
 
 ```shell
 # on branch main where HEAD~1 is tagged with 1.3.5
-$> conventional-commits-cli -m "feat: add list_all to /api/v2" -l
+$> conventional_semver -m "feat: add list_all to /api/v2" -l
 1.4.0
 ```
 
@@ -42,7 +42,7 @@ The example below will compute a `new_tag` based on the latest commit message _a
 version on the branch and then create a corresponding tag.
 
 ```shell
-$> new_tag=$(conventional-commits-cli -m "$(git show -s --format=%s)" -l)
+$> new_tag=$(conventional_semver -m "$(git show -s --format=%s)" -l)
 $> git tag -a $new_tag -m "bump"
 $> git push origin $new_tag
 ```

@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from conventional_commit_cli.calculate import calculate_bump, calculate_new_version
-from conventional_commit_cli.validate import parse
+from conventional_semver.calculate import calculate_bump, calculate_new_version
+from conventional_semver.validate import parse
 
 
 def test__parse__correct_type_and_breaking():

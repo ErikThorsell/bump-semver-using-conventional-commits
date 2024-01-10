@@ -132,14 +132,24 @@ def main():
             f"Latest Semantic Version was provided as an argument: {args.semver}"
         )
         semver = args.semver
+
     elif args.local:
         logger.debug(
             "Latest Semantic Version will be fetched from the current git branch"
         )
         repo = Repo(Path.cwd())
         tags = sorted(repo.tags, key=lambda t: t.tag.tagged_date)
-        semver = str(tags[-1])
+        try:
+            semver = str(tags[-1])
+        except Exception as err:
+            if not tags:
+                logger.error("There seems to be no tags in the repo!")
+            else:
+                logger.error("Something went wrong when attempting to fetch tags!")
+            logger.error(f"Error: {err}")
+            raise
         logger.info(f"Latest tag on current branch is: {semver}")
+
     else:
         logger.debug("No SemVer provided, defaulting to 0.0.0")
         semver = "0.0.0"

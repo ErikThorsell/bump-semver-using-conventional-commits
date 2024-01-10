@@ -7,3 +7,4 @@
 poetry run black src/ tests/ --check
 poetry run flake8 --ignore=E501 src/ tests/
 poetry run pytest tests/
+poetry run bats tests/integration.bats

@@ -62,13 +62,28 @@ def calculate_new_version(version, bump, pre="", build=""):
 
     # Stitch together a new version depending on whether pre-release, build metadata
     # or neither was provided.
+    # The semantic-version lib dictates that prerelease and build are passed as tuples, hence the split.
     if pre and build:
         return Version(
-            f"{new_base.major}.{new_base.minor}.{new_base.patch}-{pre}+{build}"
+            major=new_base.major,
+            minor=new_base.minor,
+            patch=new_base.patch,
+            prerelease=pre.split("."),
+            build=build.split("."),
         )
     if pre:
-        return Version(f"{new_base.major}.{new_base.minor}.{new_base.patch}-{pre}")
+        return Version(
+            major=new_base.major,
+            minor=new_base.minor,
+            patch=new_base.patch,
+            prerelease=pre.split("."),
+        )
     if build:
-        return Version(f"{new_base.major}.{new_base.minor}.{new_base.patch}+{build}")
+        return Version(
+            major=new_base.major,
+            minor=new_base.minor,
+            patch=new_base.patch,
+            build=build.split("."),
+        )
 
-    return Version(f"{new_base.major}.{new_base.minor}.{new_base.patch}")
+    return Version(major=new_base.major, minor=new_base.minor, patch=new_base.patch)

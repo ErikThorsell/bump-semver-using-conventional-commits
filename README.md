@@ -1,14 +1,7 @@
 Bump your Semantic Version using Conventional Commits
 ===
 
-A Python CLI tool for calculating the Semantic Version based on a commit message and an
-existing SemVer.
-
-A tool like this shines when put in a trunk based workflow, where every commit on trunk is
-built (only once) and must be given a version.
-Since **the tool itself never modifies your git repository** you can safely use it both as
-part of your PR phase (answering the question: _If this PR is merged right now, what would
-the version be_?) and to inform your CI/build-system how to tag a new commit on trunk.
+A Python CLI tool for calculating how to bump a Semantic Version based on a commit message.
 
 
 ## Installation and Usage
@@ -19,34 +12,54 @@ $> pip install conventional_semver
 
 ### Configuration
 
-Create a `.toml` file and modify the settings you want to be different from the PCCC defaults. An example `config.toml` file is present in this repository.
+Create a `.toml` file and modify the settings you want to be different from the PCCC defaults.
+An example `config.toml` file is present in this repository.
 
-### Example with version provided
 
-For maximum flexibility, the tool can be run with both the message and current version as inputs:
+### Usage
 
-```shell
-$> conventional_semver -m "feat: add list_all to /api/v2" -v "1.3.5"
-1.4.0
-```
-
-### Example with version fetched from branch
-
-It is also possible to fetch the latest tag from the current branch, using the `-l / --local` option:
+The most basic usage of this tool is to create a config file as described above
+and pass a conventional commit message as input to the script. 
 
 ```shell
-# on branch main where HEAD~1 is tagged with 1.3.5
-$> conventional_semver -m "feat: add list_all to /api/v2" -l
-1.4.0
+$> conventional_semver "fix: ensure /api/list-all returns properly"
+$> 0.0.1
 ```
 
-This is particularly useful if you work trunk based as you can use it in combination with
+It is also possible to provide a SemVer as an argument and have the
+script calculate the next version:
+
+```shell
+$> conventional_semver --semver 1.0.8 "feat: add new cool feature"
+$> 1.1.0
+```
+
+The tool also supports the SemVer options for pre-releases and build metadata:
+
+--pre-release
+--build-meta
+
+which will append the provided strings in a SemVer compatible manner.
+
+```shell
+$> conventional_semver --semver 1.0.8 --pre-release alpha.1 --build-meta $(date -I) "feat: add new cool feature"
+$> 1.1.0-alpha.1+2024-01-10
+```
+
+Note that the lib used for SemVer parsing is a bit more relaxed than the
+official documentation, w.r.t. pre-release and build metadata.
+Make sure the strings provided follow the SemVer specification!
+
+
+## Pipeline example
+
+This tool is particularly useful if you work trunk based, as you can use it in combination with
 the information already present in your git repository to automatically tag your new commit.
 The example below will compute a `new_tag` based on the latest commit message _and_ the latest
 version on the branch and then create a corresponding tag.
 
 ```shell
-$> new_tag=$(conventional_semver -m "$(git show -s --format=%s)" -l)
+$> new_tag=$(conventional_semver -s -l "feat: add new cool feature")
 $> git tag -a $new_tag -m "bump"
 $> git push origin $new_tag
 ```
@@ -56,9 +69,5 @@ $> git push origin $new_tag
 
 The tool relies on [The Python Conventional Commit Parser](https://github.com/jeremyagray/pccc/tree/main) for the
 validation of the commit message and on [Python SemanticVersion](https://github.com/rbarrois/python-semanticversion) for
-managing the Semantic Version.
-
-
-## Prerequisites
-
-* [The Enchant C Library used by PyEnchant](https://pyenchant.github.io/pyenchant/install.html)
+managing the Semantic Version. The former of these use
+[the Enchant C Library used by PyEnchant](https://pyenchant.github.io/pyenchant/install.html).

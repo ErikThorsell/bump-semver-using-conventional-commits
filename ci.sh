@@ -5,5 +5,5 @@
 # and is also invoked as a GitHub Action on every Pull Request.
 
 poetry run black conventional_semver/ --check
-poetry run flake8 conventional_semver/ tests/
+poetry run flake8 --ignore=E501 conventional_semver/ tests/
 poetry run pytest tests/

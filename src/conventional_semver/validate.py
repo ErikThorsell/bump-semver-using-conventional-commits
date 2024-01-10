@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from loguru import logger
 import pccc
 from pccc.config import _load_file
@@ -25,10 +27,21 @@ def parse(message, config_file):
     If the ccr.parse() call is NOT successful an Exception will be raised.
     """
 
-    logger.debug(f"{message}")
-
     ccr = pccc.ConventionalCommitRunner()
-    ccr.options = _get_config(config_file)
+
+    config_file_path = Path(config_file)
+    if not config_file_path.is_file():
+        logger.error(f"Config file: {config_file_path} does not seem to exist!")
+        logger.warning(
+            "The script will attempt to look for config files in the PCCC default places."
+        )
+        config_file = None
+
+    try:
+        ccr.options = _get_config(config_file)
+    except Exception:
+        logger.error("The script was unable to find a config file to use!")
+        raise
 
     ccr.raw = message.strip()
     ccr.clean()

@@ -1,7 +1,9 @@
 import argparse
+from pathlib import Path
 import textwrap
 import sys
 
+from git import Repo
 from loguru import logger
 
 from conventional_semver.calculate import calculate_bump, calculate_new_version
@@ -77,6 +79,7 @@ def _parse_args():
 
     version_mutex.add_argument(
         "--local",
+        "-l",
         action="store_true",
         help="Determine the latest version using the latest available git-tag",
     )
@@ -133,8 +136,10 @@ def main():
         logger.debug(
             "Latest Semantic Version will be fetched from the current git branch"
         )
-        logger.error("This functionality is not yet implemented!")
-        raise NotImplementedError("This functionality is not yet implemented!")
+        repo = Repo(Path.cwd())
+        tags = sorted(repo.tags, key=lambda t: t.tag.tagged_date)
+        semver = str(tags[-1])
+        logger.info(f"Latest tag on current branch is: {semver}")
     else:
         logger.debug("No SemVer provided, defaulting to 0.0.0")
         semver = "0.0.0"

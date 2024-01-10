@@ -59,8 +59,8 @@ The example below will compute a `new_tag` based on the latest commit message _a
 version on the branch and then create a corresponding tag.
 
 ```shell
-$> new_tag=$(conventional_semver -s -l "feat: add new cool feature")
-$> git tag -a $new_tag -m "bump"
+$> new_tag=$(conventional_semver -s -l "$(git show -s --format=%s)")
+$> git tag -a $new_tag -m "$new_tag"
 $> git push origin $new_tag
 ```
 

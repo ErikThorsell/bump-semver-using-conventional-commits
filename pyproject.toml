@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "conventional_semver"
-version = "0.1.0-alpha.6"
+version = "0.2.0-alpha.1"
 description = "CLI tool for deciding the next semantic version of the project, using conventional commits."
 authors = ["Erik Thorsell <erik@thorsell.io>"]
 license = "GPLv3"
@@ -11,6 +11,7 @@ python = "^3.12"
 loguru = "^0.7.2"
 pccc = "^0.4.14"
 semantic-version = "^2.10.0"
+gitpython = "^3.1.40"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.12.1"

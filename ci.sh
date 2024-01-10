@@ -4,6 +4,6 @@
 # This script can be invoked both from your development environment:
 # and is also invoked as a GitHub Action on every Pull Request.
 
-poetry run black conventional_semver/ --check
-poetry run flake8 --ignore=E501 conventional_semver/ tests/
+poetry run black src/ tests/ --check
+poetry run flake8 --ignore=E501 src/ tests/
 poetry run pytest tests/

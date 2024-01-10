@@ -142,8 +142,8 @@ def main():
     new_version = calculate_new_version(semver, bump, args.pre_release, args.build_meta)
 
     logger.info(f"New version: {new_version}")
-    return new_version
+    print(new_version)
 
 
 if __name__ == "__main__":
-    print(main())
+    main()

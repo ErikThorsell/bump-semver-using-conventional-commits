@@ -86,5 +86,5 @@ jobs:
       - name: Publish package
         run: poetry publish --repository publish
         env:
-          POETRY_REPOSITORIES_PUBLISH_URL: https://test.pypi.org/legacy/
-          POETRY_PYPI_TOKEN_PUBLISH: ${{ secrets.PYPI_TEST_API_TOKEN }}
+          POETRY_REPOSITORIES_PUBLISH_URL: https://upload.pypi.org/legacy/
+          POETRY_PYPI_TOKEN_PUBLISH: ${{ secrets.PYPI_API_TOKEN }}

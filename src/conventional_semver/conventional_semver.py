@@ -5,6 +5,7 @@ import sys
 
 from git import Repo
 from loguru import logger
+from pyparsing.exceptions import ParseException
 
 from conventional_semver.calculate import calculate_bump, calculate_new_version
 from conventional_semver.validate import parse
@@ -28,7 +29,7 @@ def _parse_args():
             It is also possible to provide a SemVer as an argument and have the
             script calculate the next version:
 
-            $> conventional_semver --latest-version 1.0.8 "feat: add new cool feature"
+            $> conventional_semver --semver 1.0.8 "feat: add new cool feature"
             $> 1.1.0
 
             The tool also supports the SemVer options for pre-releases and build metadata:
@@ -38,7 +39,7 @@ def _parse_args():
 
             which will append the provided strings in a SemVer compatible manner.
 
-            $> conventional_semver --latest-version 1.0.8 --pre-release alpha.1 --build-meta $(date -I) "feat: add new cool feature"
+            $> conventional_semver --semver 1.0.8 --pre-release alpha.1 --build-meta $(date -I) "feat: add new cool feature"
             $> 1.1.0-alpha.1+2024-01-10
 
             Note that the lib used for SemVer parsing is a bit more relaxed than the
@@ -122,7 +123,14 @@ def main():
     logger.info(f"Message:\n{args.message}")
 
     # Parse the commit message and compute the bump
-    parsed_message = parse(args.message, args.config)
+    try:
+        parsed_message = parse(args.message, args.config)
+    except ParseException as err:
+        logger.error(
+            "Parsing of commit message failed! This is likely due to the message NOT being a valid Conventional Commit."
+        )
+        logger.error(f"Error: {err}")
+        raise
     bump = calculate_bump(parsed_message)
 
     # Determine how to get ahold of the latest version

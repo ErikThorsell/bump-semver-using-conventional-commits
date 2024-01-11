@@ -34,15 +34,12 @@ $> conventional_semver --semver 1.0.8 "feat: add new cool feature"
 $> 1.1.0
 ```
 
-The tool also supports the SemVer options for pre-releases and build metadata:
-
---pre-release
---build-meta
-
-which will append the provided strings in a SemVer compatible manner.
+The tool also supports the SemVer options for pre-releases and build metadata,
+using `--pre-release` and `--build-meta`, which will append the provided
+strings in a SemVer compatible manner.
 
 ```shell
-$> conventional_semver --semver 1.0.8 --pre-release alpha.1 --build-meta $(date -I) "feat: add new cool feature"
+$> conventional_semver --semver 1.0.8 --pre-release alpha.1 --build-meta $(date -u +"%Y-%m-%dT%H:%M:%SZ") "feat: add new cool feature"
 $> 1.1.0-alpha.1+2024-01-10
 ```
 
@@ -53,16 +50,13 @@ Make sure the strings provided follow the SemVer specification!
 
 ## Pipeline example
 
-This tool is particularly useful if you work trunk based, as you can use it in combination with
-the information already present in your git repository to automatically tag your new commit.
-The example below will compute a `new_tag` based on the latest commit message _and_ the latest
-version on the branch and then create a corresponding tag.
-
-```shell
-$> new_tag=$(conventional_semver -s -l "$(git show -s --format=%s)")
-$> git tag -a $new_tag -m "$new_tag"
-$> git push origin $new_tag
-```
+This tool is particularly useful if you work trunk based, as you can use it in 
+combination with the information already present in your git repository to 
+automatically tag your new commit.
+I have created [a sample
+project](https://github.com/ErikThorsell/conventional_semver-test) where I
+show how to use the tool in a GitHub Workflow, for for validating PRs and for
+tagging new commits on `main`.
 
 
 ## Dependencies

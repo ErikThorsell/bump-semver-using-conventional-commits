@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "conventional_semver"
-version = "0.2.4"
+version = "0.2.5"
 description = "CLI tool for deciding the next semantic version of the project, using conventional commits."
 authors = ["Erik Thorsell <erik@thorsell.io>"]
 license = "GPLv3"

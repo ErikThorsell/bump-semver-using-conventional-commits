@@ -40,7 +40,7 @@ strings in a SemVer compatible manner.
 
 ```shell
 $> conventional_semver --semver 1.0.8 --pre-release alpha.1 --build-meta $(date -u +"%Y-%m-%dT%H:%M:%SZ") "feat: add new cool feature"
-$> 1.1.0-alpha.1+2024-01-10
+$> 1.1.0-alpha.1+2024-01-11T07:21:57Z
 ```
 
 Note that the lib used for SemVer parsing is a bit more relaxed than the
@@ -55,7 +55,7 @@ combination with the information already present in your git repository to
 automatically tag your new commit.
 I have created [a sample
 project](https://github.com/ErikThorsell/conventional_semver-test) where I
-show how to use the tool in a GitHub Workflow, for for validating PRs and for
+show how to use the tool in a GitHub Workflow, both for validating PRs and for
 tagging new commits on `main`.
 
 
